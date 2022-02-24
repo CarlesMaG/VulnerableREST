@@ -2,7 +2,7 @@
 
 This project is compatible with Python 3.9
 
-## Tun run the project in Windows use the following steps:
+## Tu run the project in Windows use the following steps:
   1. Clone the repository 
   2. Create a new virtual environment: python.exe -m venv .
   3. Activate the virtual environment: scripts\activate.ps1
