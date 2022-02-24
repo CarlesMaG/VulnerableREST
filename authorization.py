@@ -1,10 +1,8 @@
 import jwt
 import datetime
-
 from functools import wraps
 from flask import request
 from apiflask import APIFlask, Schema, input, output, abort
-
 from sampleData import users
 
 secret_key = 'd7d8c4b3-3f24-4dfd-b858-03846de91101'
