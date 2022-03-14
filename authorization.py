@@ -36,9 +36,9 @@ def user_in_role(user_id, roles):
         for u in users:
             if u['id'] == user_id:
                 if u['role'] == r:
-                    print(':) User [' + u['username'] + '] belongs to required role [' + r + ']')
+                    print(':) User [' + user_id + '] belongs to required role [' + r + ']')
                     return True
-    print(':( User [' + u['username'] + '] does not belong to required roles ' + str(roles))
+    print(':( User [' + user_id + '] does not belong to required roles ' + str(roles))
     return False
 
 
@@ -55,5 +55,5 @@ def require_role(roles, message=None, status_code=401):
 
 
 def generate_token(username):
-    return jwt.encode({'user_id': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=600)},
+    return jwt.encode({'user_id': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60000)},
                secret_key, "HS256")
