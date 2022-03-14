@@ -36,7 +36,7 @@ def user_in_role(user_id, roles):
         for u in users:
             if u['id'] == user_id:
                 if u['role'] == r:
-                    print(':) User [' + user_id + '] belongs to required role [' + r + ']')
+                    print(':) User [' + user_id + '] belongs to required role [' + r + '] ')
                     return True
     print(':( User [' + user_id + '] does not belong to required roles ' + str(roles))
     return False
