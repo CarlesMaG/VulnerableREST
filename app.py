@@ -50,6 +50,34 @@ def get_patient(patient_id):
     abort(404)
 
 
+@app.post('/api/v1/patient')
+@require_role(roles=["Doctor"])
+@input(PatientInSchema(partial=True))
+@output(PatientOutSchema)
+def post_patient(data):
+    patients.append(data)
+    return {'message': 'Ok', 'status_code': 200}
+
+
+@app.put('/api/v1/patient')
+@require_role(roles=["Doctor"])
+@input(PatientInSchema(partial=True))
+@output(PatientOutSchema)
+def put_patient(data):
+    patients.append(data)
+    return {'message': 'Ok', 'status_code': 200}
+
+
+@app.delete('/api/v1/patient/<string:patient_id>')
+@require_role(roles=["Doctor", "Auxiliary"])
+def delete_patient(patient_id):
+    for p in patients:
+        if p['id'] == str(patient_id):
+            patients.remove(p)
+            return {'message': 'Ok', 'status_code': 200}
+    abort(404)
+
+
 @app.get('/api/v1/patient/<string:patient_id>/sensitive')
 @output(PatientSensitiveOutSchema)
 @require_role(roles=["Doctor"])
@@ -58,15 +86,6 @@ def get_patient_sensitive(patient_id):
         if p['id'] == str(patient_id):
             return p
     abort(404)
-
-
-@app.post('/api/v1/patient')
-@require_role(roles=["Doctor"])
-@input(PatientInSchema(partial=True))
-@output(PatientOutSchema)
-def post_patient(data):
-    patients.append(data)
-    return {'message': 'Ok', 'status_code': 200}
 
 
 @app.get('/api/v1/admin')
