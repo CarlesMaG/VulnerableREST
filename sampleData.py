@@ -38,9 +38,28 @@ patients = [
     }
 ]
 
-hospital = {
-    'id': 'hospital1',
-    'name': 'hospital1',
-    'address': 'fake street 1',
-    'phone': '555-55-55-55'
-}
+hospitals = [
+    {
+        'id': 'hospital1',
+        'name': 'hospital1',
+        'address': 'fake street 1',
+        'phone': '555-55-55-55',
+        'departments': [
+            {
+                'id': 'department1',
+                'location': 'building1'
+            },
+            {
+                'id': 'department2',
+                'location': 'building2'
+            }
+        ]
+    },
+    {
+        'id': 'hospital1',
+        'name': 'hospital1',
+        'address': 'fake street 1',
+        'phone': '555-55-55-55',
+        'departments': []
+    }
+]

@@ -2,11 +2,11 @@
 
 from authorization import require_role, generate_token
 from apiflask import APIFlask, input, output, abort, HTTPTokenAuth
-from sampleData import users, patients, hospital
+from sampleData import users, patients, hospitals
 
 from schemas import JwtOutSchema, UserInSchema, UserOutSchema
 from schemas import PatientInSchema, PatientOutSchema, PatientSensitiveOutSchema
-from schemas import HospitalOutSchema
+from schemas import HospitalOutSchema, DepartmentOutSchema
 
 app = APIFlask(__name__)
 token_auth = HTTPTokenAuth()
@@ -93,8 +93,22 @@ def get_admin_v1():
     return {'message': 'You are not allowed to perform this action', 'status_code': 200}
 
 
-@app.get('/api/v1/hospital')
+@app.get('/api/v1/hospital/<string:hospital_id>')
 @output(HospitalOutSchema)
-def get_hospital_v1():
-    return hospital
+def get_hospital_v1(hospital_id):
+    for h in hospitals:
+        if h['id'] == str(hospital_id):
+            return h
+    abort(404)
+
+
+@app.get('/api/v1/hospital/<string:hospital_id>/department/<string:department_id>')
+@output(DepartmentOutSchema)
+def get_department_v1(hospital_id, department_id):
+    for h in hospitals:
+        if h['id'] == str(hospital_id):
+            for d in h['departments']:
+                if d['id'] == str(department_id):
+                    return d
+    abort(404)
 

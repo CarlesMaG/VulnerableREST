@@ -1,5 +1,5 @@
 from apiflask import  Schema
-from apiflask.fields import Integer, String, UUID
+from apiflask.fields import Integer, String, UUID, List, Nested
 from apiflask.validators import Length, OneOf
 
 
@@ -40,8 +40,14 @@ class PatientSensitiveOutSchema(Schema):
     sensitive_data = String()
 
 
+class DepartmentOutSchema(Schema):
+    id = String()
+    location = String()
+
+
 class HospitalOutSchema(Schema):
     id = String()
     name = String()
     address = String()
     phone = String()
+    departments = List(Nested(DepartmentOutSchema))
